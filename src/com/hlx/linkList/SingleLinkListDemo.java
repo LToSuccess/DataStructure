@@ -27,6 +27,18 @@ public class SingleLinkListDemo {
         singleLinkList.addByOrder(heroNode3);
         singleLinkList.addByOrder(heroNode3);
         singleLinkList.list();
+
+
+        //测试修改节点
+        singleLinkList.update(new HeroNode(2, "小卢", "玉麒麟1"));
+        //修改后的列表
+        singleLinkList.list();
+        System.out.println();
+        //删除节点
+        singleLinkList.delete(1);
+        singleLinkList.delete(4);
+        //删除后的列表
+        singleLinkList.list();
     }
 
 }
@@ -86,6 +98,55 @@ class SingleLinkList {
             }
             System.out.println(temp);
             temp = temp.next;
+        }
+    }
+
+    //修改
+    public void update(HeroNode heroNode) {
+        if (head.next == null) {
+            System.out.println("链表为空");
+            return;
+        }
+        HeroNode temp = head.next;
+        boolean flag = false;   //表示是否找到该节点
+        while (true) {
+            if (temp == null) {
+                break;
+            }
+            if (temp.no == heroNode.no) {
+                flag = true;
+                break;
+            }
+            temp = temp.next;
+        }
+        if (flag) {
+            temp.name = heroNode.name;
+            temp.nickName = heroNode.nickName;
+        } else {
+            System.out.println("没有找到节点");
+        }
+
+    }
+
+
+    //删除节点
+    public void delete(int no) {
+        HeroNode temp = head;
+        boolean flag = false;
+        while (true) {
+            if (temp.next == null) {
+                break;
+            }
+            if (temp.next.no == no) {
+                flag = true;
+                break;
+            }
+            temp = temp.next;
+        }
+        if (flag) {
+            temp.next = temp.next.next;
+        } else {
+            System.out.println("没有要删除的节点");
         }
     }
 }
